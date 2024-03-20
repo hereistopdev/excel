@@ -39,7 +39,7 @@ function App() {
           <BasicDateTimePicker date={date} setDate={setDate} />
           <BasicTable vals={vals} setVals={setVals} presents={presents} />
           <Box display={"flex"} gap={2} justifyContent={"center"}>
-            <Docx title="Minutes" />
+            <Docx title="Minutes" presents={presents} absent={absent} />
             <Docx title="Agenda" />
           </Box>
         </Card>
