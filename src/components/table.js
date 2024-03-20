@@ -19,30 +19,12 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import AddIcon from "@mui/icons-material/Add";
 import SaveIcon from "@mui/icons-material/Save";
-import { EditLocation } from "@mui/icons-material";
 
-function createData(topic, mentiond, seconded, action) {
-  return { topic, mentiond, seconded, action };
-}
-
-const rows = [
-  createData("Frozen yoghurt", 1, 2, 0),
-  createData("Frozen yoghurt", 1, 2, 0),
-  createData("Frozen yoghurt", 1, 2, 0),
-  createData("Frozen yoghurt", 1, 2, 0),
-];
-
-export default function BasicTable({ vals, setVals }) {
+export default function BasicTable({ vals, setVals, presents }) {
   const actives = ["Approved", "Denied", "Tabled", "Removed from the table"];
 
   const [isEdit, setIsEdit] = React.useState(-1);
 
-  const [member, setMember] = React.useState([
-    "Mr. Freese",
-    "Mr. Glidden",
-    "Mr. Hoffman",
-    "Mrs. Sperling",
-  ]);
   const [activeStatus, setActiveStatus] = React.useState("");
 
   const [topic, setTopic] = React.useState("");
@@ -111,8 +93,8 @@ export default function BasicTable({ vals, setVals }) {
                   {index + 1}
                 </TableCell>
                 <TableCell align="center">{row.topic}</TableCell>
-                <TableCell align="center">{member[row.mentioned]}</TableCell>
-                <TableCell align="center">{member[row.seconded]}</TableCell>
+                <TableCell align="center">{presents[row.mentioned]}</TableCell>
+                <TableCell align="center">{presents[row.seconded]}</TableCell>
                 <TableCell align="center">
                   {actives[row.activeStatus]}
                 </TableCell>
@@ -143,13 +125,13 @@ export default function BasicTable({ vals, setVals }) {
           value={topic}
         />
         <BasicSelect
-          list={member}
+          list={presents}
           value={mentioned}
           func={setMentioned}
           label="Mentioned By"
         />
         <BasicSelect
-          list={member}
+          list={presents}
           value={seconded}
           func={setSeconded}
           label="Seconded By"
