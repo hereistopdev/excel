@@ -9,12 +9,8 @@ import dayjs from "dayjs";
 function App() {
   const [vals, setVals] = React.useState([]);
   const [date, setDate] = useState(dayjs(new Date()));
-  const [presents, setPresents] = useState([]);
+  const [presents, setPresents] = useState(["AAA", "BBB", "CCC"]);
   const [absent, setAbsent] = useState([]);
-
-  useEffect(() => {
-    console.log(date);
-  }, [date]);
 
   return (
     <div className="App">
@@ -23,6 +19,7 @@ function App() {
           <Box gap={2} display={"flex"} justifyContent={"center"}>
             <TextField
               label="Present Names"
+              defaultValue={"AAA,BBB,CCC"}
               onChange={(e) => {
                 const val = e.target.value;
                 const temp = val.split(",");
