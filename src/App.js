@@ -8,6 +8,8 @@ import dayjs from "dayjs";
 
 function App() {
   const [vals, setVals] = React.useState([]);
+  const actives = ["Approved", "Denied", "Tabled", "Removed from the table"];
+
   const [date, setDate] = useState(dayjs(new Date()));
   const [presents, setPresents] = useState(["AAA", "BBB", "CCC"]);
   const [absent, setAbsent] = useState([]);
@@ -50,7 +52,12 @@ function App() {
             />
           </Box>
           <BasicDateTimePicker date={date} setDate={setDate} />
-          <BasicTable vals={vals} setVals={setVals} presents={presents} />
+          <BasicTable
+            vals={vals}
+            setVals={setVals}
+            presents={presents}
+            actives={actives}
+          />
           <Box display={"flex"} gap={2} justifyContent={"center"}>
             <input type="file" onChange={handleImageChange} accept="image/*" />
             <Docx
@@ -58,6 +65,8 @@ function App() {
               presents={presents}
               absent={absent}
               image={image}
+              data={vals}
+              actives={actives}
             />
             <Docx title="Agenda" />
           </Box>

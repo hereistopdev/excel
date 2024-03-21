@@ -13,9 +13,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import AddIcon from "@mui/icons-material/Add";
 import SaveIcon from "@mui/icons-material/Save";
 
-export default function BasicTable({ vals, setVals, presents }) {
-  const actives = ["Approved", "Denied", "Tabled", "Removed from the table"];
-
+export default function BasicTable({ vals, setVals, presents, actives }) {
   const [isEdit, setIsEdit] = React.useState(-1);
 
   const [activeStatus, setActiveStatus] = React.useState("");
