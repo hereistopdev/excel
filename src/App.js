@@ -5,6 +5,7 @@ import { Box, Card, TextField } from "@mui/material";
 import React, { useState } from "react";
 import BasicDateTimePicker from "./components/dateTimePicker";
 import dayjs from "dayjs";
+import Agenda from "./components/agenda";
 
 function App() {
   const [vals, setVals] = React.useState([]);
@@ -68,7 +69,14 @@ function App() {
               data={vals}
               actives={actives}
             />
-            <Docx title="Agenda" />
+            <Agenda
+              title="Agenda"
+              presents={presents}
+              absent={absent}
+              image={image}
+              data={vals}
+              actives={actives}
+            />
           </Box>
         </Card>
       </header>
