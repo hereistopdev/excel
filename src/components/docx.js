@@ -1,15 +1,32 @@
 import React from "react";
-import { AlignmentType, Document, Packer, Paragraph, TextRun } from "docx";
+import {
+  AlignmentType,
+  Document,
+  ImageRun,
+  Packer,
+  Paragraph,
+  TextRun,
+} from "docx";
 import { saveAs } from "file-saver";
 import { Button } from "@mui/material";
 
-function Docx({ title, presents, absent }) {
+const Docx = ({ title, presents, absent, image }) => {
   const createDocument = () => {
     const doc = new Document({
       sections: [
         {
-          properties: {},
           children: [
+            new Paragraph({
+              children: [
+                new ImageRun({
+                  data: image, // Your base64 image string
+                  transformation: {
+                    width: 100,
+                    height: 100,
+                  },
+                }),
+              ],
+            }),
             new Paragraph({
               alignment: AlignmentType.RIGHT,
               children: [
@@ -87,22 +104,182 @@ function Docx({ title, presents, absent }) {
             }),
             new Paragraph(""),
             new Paragraph({
-              text: "Present : " + presents.join(","),
-              alignment: AlignmentType.CENTER,
-            }),
-            new Paragraph({
-              text: "Absent : " + absent.join(","),
-              alignment: AlignmentType.CENTER,
+              children: [
+                new TextRun({
+                  text:
+                    "Present : " +
+                    presents.join(",") +
+                    "  ( " +
+                    presents.length +
+                    " )",
+                  bold: true,
+                  size: 25,
+                }),
+              ],
+              alignment: AlignmentType.LEFT,
+              spacing: {
+                after: 100,
+                before: 100,
+              },
             }),
             new Paragraph({
               children: [
-                new TextRun(title),
-                new TextRun("Hello, World!"),
                 new TextRun({
-                  text: " This is a second sentence.",
+                  text:
+                    "Absent : " +
+                    absent.join(",") +
+                    "  ( " +
+                    absent.length +
+                    " )",
                   bold: true,
+                  size: 25,
                 }),
               ],
+              alignment: AlignmentType.LEFT,
+              spacing: {
+                after: 100,
+                before: 100,
+              },
+            }),
+            new Paragraph({
+              children: [
+                new TextRun({
+                  bold: true,
+                  text: "Also present were ",
+                }),
+                new TextRun({
+                  text: " Shannon Eason, Superintendent; William Walker, Assistant Superintendent; Laura Nirenberg, Park Board Attorney; Pat Voltz, Maintenance Director; Bryant Dabney, City Council Liaison; Drew White, ALCO TV; Bruce Manner, Port Authority; Kyle Petter, City Planning; Victor Tieri, Harbor Country Adventures; Eric Willliams, Special Events; Terry Greetham, Special Events; Larry Spaeth, Dunescape; Scott Miller, CVB; Marty Niemann, Golf Manager; and Rick Wright, CVB.",
+                }),
+              ],
+              spacing: {
+                before: 100,
+                after: 200,
+              },
+            }),
+            new Paragraph({
+              text: "On a motion made by Mr. Hoffman, seconded by Mrs. Sperling and voted for unanimously by the Board, the Board approved the minutes of the January 17th, 2024, Board meeting.",
+              bullet: {
+                level: 0, // Bullet list level, 0 is the first level
+              },
+              spacing: {
+                after: 100,
+              },
+            }),
+            new Paragraph({
+              text: "On a motion made by Mr. Glidden, seconded by Mrs. Sperling and voted for unanimously by the Board, the Board approved the Harbor Country Adventures Request to Place a Stage and Concession Stand at Millennium Plaza, contingent on the City’s Engineers approval of the design.",
+              bullet: {
+                level: 0,
+              },
+              spacing: {
+                after: 100,
+              },
+            }),
+            new Paragraph({
+              text: "Superintendent Shannon Eason reported that the Park and Recreation Department has resumed regular department head meetings twice a month, talked about being on the YMCA Advisory Committee, met with Sunset Grill to discuss the years operations and events, plans to present the 2023 Annual Report to the next board meeting, seeking further funding for the Fedder’s Alley Park Project, working on parking solutions at Patriot Park and the beach, touched on the current status of the Millenium Plaza Fountain project, announced that Golf Maintenance will take a training trip to Fort Wayne next month, and announced that all Park departments are currently in the hiring process for seasonal staff. ",
+              spacing: {
+                before: 150,
+                after: 150,
+              },
+            }),
+            new Paragraph({
+              text: " Assistant Superintendent William Walker reported an update on Pantries in the Park, gave an update on the adult basketball league, and an update on baseball sign ups. The Recreation department plans to present two Easter events to the board at the next meeting.",
+              spacing: {
+                before: 150,
+                after: 150,
+              },
+            }),
+            new Paragraph({
+              text: "Director of Park Maintenance Pat Voltz reported Park Maintenance’s January update which included their snow removal impact, wrapping up Christmas lights for the year, and announced that they are looking to hire twenty seasonal employees.",
+              spacing: {
+                before: 150,
+                after: 150,
+              },
+            }),
+            new Paragraph({
+              text: "Assistant Events Coordinator Eric Williams gave a report on the special events that are lined up for the year. Each event is growing as they should. ",
+              spacing: {
+                before: 150,
+                after: 150,
+              },
+            }),
+
+            new Paragraph({
+              text: "On a motion made by Mr. Hoffman, seconded by Mrs. Sperling and voted for unanimously by the Board, the Board approved the minutes of the January 17th, 2024, Board meeting.",
+              bullet: {
+                level: 0, // Bullet list level, 0 is the first level
+              },
+              spacing: {
+                after: 100,
+              },
+            }),
+            new Paragraph({
+              text: "On a motion made by Mr. Glidden, seconded by Mrs. Sperling and voted for unanimously by the Board, the Board approved the Harbor Country Adventures Request to Place a Stage and Concession Stand at Millennium Plaza, contingent on the City’s Engineers approval of the design.",
+              bullet: {
+                level: 0,
+              },
+              spacing: {
+                after: 100,
+              },
+            }),
+
+            new Paragraph({
+              text: "On a motion made by Mr. Hoffman, seconded by Mrs. Sperling and voted for unanimously by the Board, the Board approved the minutes of the January 17th, 2024, Board meeting.",
+              bullet: {
+                level: 0, // Bullet list level, 0 is the first level
+              },
+              spacing: {
+                after: 100,
+              },
+            }),
+            new Paragraph({
+              text: "On a motion made by Mr. Glidden, seconded by Mrs. Sperling and voted for unanimously by the Board, the Board approved the Harbor Country Adventures Request to Place a Stage and Concession Stand at Millennium Plaza, contingent on the City’s Engineers approval of the design.",
+              bullet: {
+                level: 0,
+              },
+              spacing: {
+                after: 100,
+              },
+            }),
+            new Paragraph({
+              text: "________________________________",
+              alignment: AlignmentType.RIGHT,
+              spacing: {
+                before: 500,
+              },
+            }),
+            new Paragraph({
+              spacing: {
+                after: 500,
+              },
+              alignment: AlignmentType.RIGHT,
+              children: [
+                new TextRun({
+                  text: "William Walker, Assistant Superintendent",
+                }),
+              ],
+            }),
+            new Paragraph({
+              text: "________________________________",
+              alignment: AlignmentType.RIGHT,
+              spacing: {
+                before: 500,
+              },
+            }),
+            new Paragraph({
+              children: [
+                new TextRun({
+                  text: "Tim Glidden, Park Board Secretary",
+                }),
+              ],
+              alignment: AlignmentType.RIGHT,
+              spacing: {
+                after: 500,
+              },
+            }),
+            new Paragraph({}),
+            new Paragraph({}),
+            new Paragraph({
+              text: "Minutes prepared by William Walker",
             }),
           ],
         },
@@ -121,6 +298,6 @@ function Docx({ title, presents, absent }) {
       Create {title} Document
     </Button>
   );
-}
+};
 
 export default Docx;

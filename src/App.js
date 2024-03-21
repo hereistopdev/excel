@@ -2,7 +2,7 @@ import "./App.css";
 import BasicTable from "./components/table";
 import Docx from "./components/docx";
 import { Box, Card, TextField } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import BasicDateTimePicker from "./components/dateTimePicker";
 import dayjs from "dayjs";
 
@@ -11,6 +11,19 @@ function App() {
   const [date, setDate] = useState(dayjs(new Date()));
   const [presents, setPresents] = useState(["AAA", "BBB", "CCC"]);
   const [absent, setAbsent] = useState([]);
+
+  const [image, setImage] = useState(null);
+
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (readerEvt) => {
+        setImage(readerEvt.target.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
 
   return (
     <div className="App">
@@ -39,7 +52,13 @@ function App() {
           <BasicDateTimePicker date={date} setDate={setDate} />
           <BasicTable vals={vals} setVals={setVals} presents={presents} />
           <Box display={"flex"} gap={2} justifyContent={"center"}>
-            <Docx title="Minutes" presents={presents} absent={absent} />
+            <input type="file" onChange={handleImageChange} accept="image/*" />
+            <Docx
+              title="Minutes"
+              presents={presents}
+              absent={absent}
+              image={image}
+            />
             <Docx title="Agenda" />
           </Box>
         </Card>

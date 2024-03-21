@@ -34,13 +34,11 @@ export default function BasicTable({ vals, setVals, presents }) {
   const onAdd = () => {
     const temp = { topic, mentioned, seconded, activeStatus };
     setVals([...vals, temp]);
-    console.log("Add", temp);
     init();
   };
 
   const onDelete = (id) => {
     const temp = vals.filter((v, i) => i !== id);
-    console.log(temp, id);
     setVals(temp);
   };
 
