@@ -43,7 +43,7 @@ export default function BasicTable({ vals, setVals, presents, actives }) {
   const onEdit = (id) => {
     const temp = vals[id];
     setTopic(temp.topic);
-    setMentioned(temp.mentiond);
+    setMentioned(temp.mentioned);
     setActiveStatus(temp.activeStatus);
     setSeconded(temp.seconded);
     setIsEdit(id);
